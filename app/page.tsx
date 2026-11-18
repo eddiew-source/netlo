@@ -6,35 +6,56 @@ import { Cta } from "@/components/Cta";
 import { services } from "@/lib/site";
 
 const benefits: { icon: IconName; title: string; text: string }[] = [
-  { icon: "wifi", title: "Business-grade connectivity", text: "Fibre, broadband and Ethernet" },
-  { icon: "network", title: "Resilience by design", text: "Backup and multi-site networking" },
-  { icon: "shield", title: "Security built in", text: "Practical, risk-led protection" },
-  { icon: "headset", title: "Real technical expertise", text: "People who understand your network" },
+  { icon: "wifi", title: "Connectivity", text: "Fibre, Ethernet and leased lines" },
+  { icon: "network", title: "Continuity", text: "Backup and multi-site networks" },
+  { icon: "shield", title: "Protection", text: "Firewalls and practical security" },
+  { icon: "headset", title: "Support", text: "Real technical conversations" },
 ];
 
 export default function Home() {
   return <>
-    <section className="hero"><div className="container hero-layout"><div className="hero-copy">
-      <div className="eyebrow"><span className="eyebrow-line"/> BROADBAND, NETWORKS AND MANAGED IT</div>
-      <h1>Business connectivity.<br/><em>Without the<br/> runaround.</em></h1>
-      <p className="hero-lede">Broadband, leased lines and managed IT, with clear advice and people who know their networks.</p>
-      <div className="hero-buttons"><a className="btn btn-primary" href="#availability">Check broadband availability <Icon name="arrow" /></a><Link className="btn btn-secondary" href="/contact">Talk to us <Icon name="arrow-up" /></Link></div>
-    </div><div className="hero-visual" aria-label="Stylised UK connectivity map">
-      <div className="map-tag">UK CONNECTIONS <span>/</span> ONE POINT OF CONTACT</div>
-      <Image className="hero-map" src="/assets/uk-network.jpg" alt="Illustrated map of connected locations across the UK" width={780} height={530} priority />
-    </div></div></section>
+    <section className="hero hero-v2">
+      <div className="container hero-layout hero-layout-v2">
+        <div className="hero-copy">
+          <div className="eyebrow"><span className="eyebrow-line"/> BUSINESS CONNECTIVITY & MANAGED IT</div>
+          <h1>Business connectivity.<br/><em>Without the runaround.</em></h1>
+          <p className="hero-lede">A better way to buy and manage broadband, networking and IT. Straight answers, sensible solutions, and someone who understands the whole picture.</p>
+          <div className="hero-buttons"><a className="btn btn-primary" href="#availability">Check your postcode <Icon name="arrow" /></a><Link className="btn btn-secondary" href="/contact">Speak to us <Icon name="arrow-up" /></Link></div>
+          <div className="hero-footnote">For one office, a growing team or a whole estate of locations.</div>
+        </div>
+        <div className="hero-visual hero-visual-v2">
+          <span className="hero-visual-kicker">UK CONNECTIVITY</span>
+          <Image className="hero-map" src="/assets/uk-network.jpg" alt="Illustrative map of connected locations around the UK" width={780} height={530} priority />
+          <span className="hero-visual-caption">Designed around where your business operates.</span>
+        </div>
+      </div>
+    </section>
     <AvailabilityChecker />
-    <section className="proof-strip" aria-label="What Netlo offers"><div className="container proof-grid">{benefits.map(b => <div key={b.title}><Icon name={b.icon} /><span><strong>{b.title}</strong><small>{b.text}</small></span></div>)}</div></section>
-    <section className="section solutions-section" id="solutions"><div className="container"><div className="section-heading"><div><span className="eyebrow eyebrow-blue">WHAT WE DO</span><h2>Broadband, networks<br/><span>and IT support.</span></h2></div><p>Start with a business broadband connection. Add resilience, security and ongoing IT support when you need them.</p></div>
-      <div className="service-grid">{services.map(item => <Link href={item.href} key={item.href} className="service-card"><div className="service-card-top"><span className="service-icon"><Icon name={item.icon as IconName}/></span><span className="service-index">{item.index}</span></div><div className="service-card-copy"><h3>{item.title}</h3><h4>{item.line}</h4><p>{item.description}</p></div><span className="card-link">Explore service <Icon name="arrow-up" /></span></Link>)}</div>
-    </div></section>
-    <section className="section difference-section"><div className="container difference-layout"><div className="difference-art"><Image src="/assets/uk-network.jpg" width={760} height={560} alt="UK network illustration" /></div><div className="difference-copy"><span className="eyebrow eyebrow-blue">WHY NETLO</span><h2>A broadband supplier<br/><span>that knows networks.</span></h2><p>The line matters. So do the router, the backup connection and who picks up when there is a problem.</p><div className="difference-list">
-      <div><span><Icon name="check"/></span><div><h3>Built around your business</h3><p>We start with how you operate, not just what speed you can buy.</p></div></div>
-      <div><span><Icon name="check"/></span><div><h3>Resilience without the jargon</h3><p>Smarter failover and connected sites, explained in plain English.</p></div></div>
-      <div><span><Icon name="check"/></span><div><h3>Expertise beyond the circuit</h3><p>Networking, infrastructure, cloud and security when you need more than broadband.</p></div></div>
-    </div><Link href="/about" className="text-arrow">Get to know Netlo <Icon name="arrow" /></Link></div></div></section>
-    <section className="section sectors-section"><div className="container"><div className="section-heading compact"><div><span className="eyebrow eyebrow-blue">WHO WE HELP</span><h2>For one site<br/><span>or twenty.</span></h2></div><p>From independent companies to teams operating across multiple locations, we'll work around what you need.</p></div><div className="sector-row"><div><Icon name="building" /> Professional services</div><div><Icon name="network" /> Multi-site businesses</div><div><Icon name="server" /> Retail & operations</div><div><Icon name="cloud" /> Cloud-first teams</div></div></div></section>
-    <section className="section process-section"><div className="container"><span className="eyebrow eyebrow-blue">OUR APPROACH</span><div className="section-heading"><h2>Simple from<br/><span>the first conversation.</span></h2><p>You shouldn't need a telecoms dictionary to make good decisions about your network.</p></div><div className="process-grid"><div><span className="step-num">01</span><h3>Tell us what matters</h3><p>Where you operate, what you need, and what happens when things go wrong.</p></div><div><span className="step-num">02</span><h3>Get the right options</h3><p>Clear recommendations for connectivity, resilience and support.</p></div><div><span className="step-num">03</span><h3>Keep moving</h3><p>A practical path from getting connected to managing what comes next.</p></div></div></div></section>
-    <Cta />
+    <section className="proof-strip proof-strip-v2" aria-label="Netlo services"><div className="container proof-grid">{benefits.map(benefit => <div key={benefit.title}><Icon name={benefit.icon}/><span><strong>{benefit.title}</strong><small>{benefit.text}</small></span></div>)}</div></section>
+    <section className="section solutions-section solutions-section-v2" id="solutions">
+      <div className="container">
+        <div className="section-heading"><div><span className="eyebrow eyebrow-blue">WHAT NETLO DOES</span><h2>One partner. More than <span>a connection.</span></h2></div><p>Buy the line you need, then add support and resilience as your business grows. No need to piece it together across different suppliers.</p></div>
+        <div className="service-grid service-grid-v2">{services.map(item => <Link href={item.href} key={item.href} className="service-card service-card-v2"><div className="service-card-top"><span className="service-icon"><Icon name={item.icon as IconName}/></span><span className="service-index">{item.index}</span></div><div className="service-card-copy"><h3>{item.title}</h3><h4>{item.line}</h4><p>{item.description}</p></div><span className="card-link">Explore service <Icon name="arrow-up" /></span></Link>)}</div>
+      </div>
+    </section>
+    <section className="section difference-section difference-section-v2">
+      <div className="container difference-layout difference-layout-v2">
+        <div className="difference-copy"><span className="eyebrow eyebrow-blue">WHY IT MATTERS</span><h2>A broadband line is only <span>part of the story.</span></h2><p>Good connectivity should quietly keep the rest of your business running. That takes more than a speed test and a router in a box.</p><div className="difference-list">
+          <div><span><Icon name="check"/></span><div><h3>Think beyond the circuit</h3><p>We consider the sites, systems and people relying on it.</p></div></div>
+          <div><span><Icon name="check"/></span><div><h3>Plan for the unexpected</h3><p>Backup connections and resilient networks where they make sense.</p></div></div>
+          <div><span><Icon name="check"/></span><div><h3>Make support part of the solution</h3><p>A clear route to help, without bouncing between suppliers.</p></div></div>
+        </div><Link href="/about" className="text-arrow">How we work <Icon name="arrow" /></Link></div>
+        <div className="network-story" aria-label="Connection, resilience and technical support">
+          <span className="network-story-label">A COMPLETE VIEW</span>
+          <div className="network-story-line"><span/></div>
+          <div className="network-story-item"><span>01</span><div><strong>The connection</strong><small>Get your business online</small></div></div>
+          <div className="network-story-item"><span>02</span><div><strong>The backup</strong><small>Plan for a line going down</small></div></div>
+          <div className="network-story-item"><span>03</span><div><strong>The people</strong><small>Keep the technical side managed</small></div></div>
+        </div>
+      </div>
+    </section>
+    <section className="section sectors-section sectors-section-v2"><div className="container"><div className="section-heading compact"><div><span className="eyebrow eyebrow-blue">WHO WE HELP</span><h2>For one site, <span>or many.</span></h2></div><p>From independent teams to multi-site organisations, the right solution depends on how your business works.</p></div><div className="sector-row"><div><Icon name="building" /> Professional services</div><div><Icon name="network" /> Multi-site businesses</div><div><Icon name="server" /> Retail & operations</div><div><Icon name="cloud" /> Cloud-first teams</div></div></div></section>
+    <section className="section process-section process-section-v2"><div className="container"><span className="eyebrow eyebrow-blue">HOW WE WORK</span><div className="section-heading"><h2>Clear from the <span>first conversation.</span></h2><p>Tell us what you need. We'll make sense of the options and explain what happens next.</p></div><div className="process-grid"><div><span className="step-num">01</span><h3>Tell us about your setup</h3><p>Sites, existing contracts and what's important to keep running.</p></div><div><span className="step-num">02</span><h3>Review the options</h3><p>Practical connectivity and support choices with clear scope.</p></div><div><span className="step-num">03</span><h3>Move forward</h3><p>A straightforward path to the right connection or ongoing service.</p></div></div></div></section>
+    <Cta title="Let's get the right setup." subtitle="Tell us about your business and we'll help you understand the options." cta="Talk to Netlo" />
   </>;
 }
