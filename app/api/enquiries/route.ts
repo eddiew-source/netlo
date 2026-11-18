@@ -1,3 +1,4 @@
+import { readJsonInput, HttpInputError } from "@/lib/http-input";
 import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
@@ -6,9 +7,8 @@ const isText = (x: unknown, max: number) => typeof x === "string" && x.trim().le
 const escapeHtml = (s: string) => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
 
 export async function POST(request: Request) {
-  if (Number(request.headers.get("content-length") || 0) > 10_000) return NextResponse.json({ error: "Enquiry is too long." }, { status: 413 });
   let raw: unknown;
-  try { raw = await request.json(); } catch { return NextResponse.json({ error: "Invalid request." }, { status: 400 }); }
+  try { raw = await readJsonInput(request, 10_000); } catch (error) { return NextResponse.json({ error: error instanceof HttpInputError ? error.message : "Invalid request." }, { status: error instanceof HttpInputError ? error.status : 400 }); }
   if (!raw || typeof raw !== "object") return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   const data = raw as Record<string, unknown>;
   for (const [field, max] of Object.entries({ name: 120, email: 255, company: 160, phone: 50, service: 80, message: 4000, website: 150 })) {

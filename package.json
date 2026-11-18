@@ -6,21 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "security:check": "npm audit --audit-level=high && npm run typecheck && npm run build"
   },
   "dependencies": {
-    "next": "^15.5.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@clerk/nextjs": "^7.10.2"
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@clerk/nextjs": "7.10.2"
   },
   "devDependencies": {
-    "@types/node": "^22.15.0",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
-    "typescript": "^5.9.2"
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "6.0.3"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": "26.x"
   }
 }

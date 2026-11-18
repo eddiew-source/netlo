@@ -1,7 +1,7 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-// Next.js 15 middleware. Route handlers and portal pages also enforce auth at the resource.
+// Next.js 16 proxy: actual resource authorization is always checked in handlers/pages.
 export default process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY
   ? clerkMiddleware()
   : () => NextResponse.next();

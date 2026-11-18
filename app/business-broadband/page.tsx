@@ -16,9 +16,9 @@ export default function BusinessBroadband() { return <ServicePage
   detailCopy="The right line depends on more than the headline speed. We'll talk through usage, critical systems, existing contracts and what happens if your primary connection fails."
   detailPoints={["FTTP and other access products where available", "Quote-led leased-line options", "Installation and contract terms explained", "Optional network management and resilience", "No made-up availability or speeds"]}
   faqs={[
-    { question:"Can you provide broadband at my address?", answer:"Availability varies by premises and network. Our automated postcode checker is being connected to our wholesale systems; you can request a manual review in the meantime." },
+    { question:"Can you provide broadband at my address?", answer:"Availability varies by property and access network. Enter your postcode above, or ask us to check the options for your address." },
     { question:"Is a leased line the same as fibre broadband?", answer:"No. A leased line typically provides dedicated, business-focused connectivity with different commercial and service arrangements. We can explain when it's worth the additional cost." },
     { question:"Can you connect multiple sites?", answer:"That is a core use case for Netlo. We can discuss the access circuits and the networking that links your locations together." },
-    { question:"Do you offer fixed prices online?", answer:"Not yet. We'll publish packages once wholesale rates, installation costs and service terms are confirmed." },
+    { question:"Do you offer fixed prices online?", answer:"Pricing depends on the location, service type, installation requirements and contract term. We'll provide a clear quote before you commit." },
   ]}
 />; }

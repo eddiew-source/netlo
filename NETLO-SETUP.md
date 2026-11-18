@@ -1,10 +1,10 @@
 # Netlo Clerk + ICUK setup
 
-This is the Next.js 15 marketing site plus **portal foundations**. The project was built from the V2 design, not a live Mac repository checkout.
+This is the Next.js 16 marketing site plus **portal foundations**. The project was built from the V2 design, not a live Mac repository checkout.
 
 ## Clerk: selected existing application
 
-The selected Clerk app is `app_3MGoc8G1Oo4Az3UssZ2MGbhQNdt`. **Do not run `clerk init` without `--app`,** or create a replacement app. The current code already has the provider, middleware, and auth pages. From the project directory, run:
+The selected Clerk app is `app_3MGoc8G1Oo4Az3UssZ2MGbhQNdt`. **Do not run `clerk init` without `--app`,** or create a replacement app. The current code already has the provider, Next.js proxy, and auth pages. From the project directory, run:
 
 ```sh
 npm install

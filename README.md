@@ -1,10 +1,12 @@
+> **Security / release:** This is a development candidate, not security-certified. Read `SECURITY-REVIEW.md` and `NETLO-V4-NOTES.md` before deploying.
+
 # Netlo — business-first marketing website
 
-A Next.js App Router / TypeScript rebuild of the Netlo static prototype, with residential broadband and Clerk portal foundations. The design uses the approved **netlo.** blue-dot identity, corporate navy/blue palette and UK network-map graphic. It is **not** an order-management system yet.
+A Next.js App Router / TypeScript rebuild of the Netlo static prototype, with residential broadband and Clerk portal foundations. The design uses the approved **netlo.** blue-dot identity, corporate navy/blue palette and a transparent, high-contrast UK network illustration (not the old framed JPEG). It is **not** an order-management system yet.
 
 ## Run locally
 
-Requirements: Node.js 20.9+ and npm. From the project directory:
+Requirements: Node.js 26 LTS and npm. From the project directory:
 
 ```sh
 cp .env.example .env.local
@@ -15,8 +17,7 @@ npm run dev
 Visit `http://localhost:3000`. For production builds:
 
 ```sh
-npm run typecheck
-npm run build
+npm run security:check
 npm start
 ```
 
@@ -33,7 +34,7 @@ Deployment: works on a normal Next.js-compatible Node host (for example Vercel).
 - `/contact` — enquiry form (server-side integration optional)
 - `/home-broadband` — dedicated residential section (also linked from top navigation and homepage)
 - `/sign-in`, `/sign-up`, `/portal` — Clerk sign-in and protected My Netlo account portal (requires chosen Clerk app keys)
-- `/privacy` — explicitly marked **draft** privacy notice
+- `/privacy` — public-facing privacy information (requires formal legal review before launch)
 - `/api/addresses` — postcode-to-address integration boundary
 - `/api/availability` — premises availability integration boundary
 - `/api/enquiries` — validated server-side email submission (Resend, once configured)
@@ -47,7 +48,7 @@ Deployment: works on a normal Next.js-compatible Node host (for example Vercel).
 - Manual-check link sends the postcode to the enquiry page
 - Enquiry form performs client + server validation, honeypot protection, and gives an **honest 503 error** until outbound email credentials are configured
 - Per-page metadata, sitemap, robots and Open Graph image
-- No analytics or customer accounts installed
+- Clerk sign-in and portal foundations in source; customer account-to-circuit mapping is intentionally disabled until verified
 
 ## Configure the enquiry form
 
@@ -79,7 +80,7 @@ Before enabling, confirm ICUK auth, access carriers, product schemas, line insta
 - Add bot protection / robust rate limiting to forms
 - Review copy against service offerings and support capabilities
 - When ready to be indexed, set `NEXT_PUBLIC_SITE_LIVE=true`; before that, pages are marked `noindex` and `robots.txt` disallows crawling
-- Run `npm run typecheck` and `npm run build` in an environment with npm registry access, then test desktop/mobile browsers
+- Generate and commit `package-lock.json` with `npm install`, then run `npm run security:check` in an environment with registry access; verify desktop/mobile, Clerk login and rollout permissions
 
 ## Design / structure
 

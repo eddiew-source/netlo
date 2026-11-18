@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-export const metadata: Metadata = { title: "Privacy notice (draft)", description: "Draft privacy notice for the Netlo pre-launch marketing website." };
-export default function Privacy() { return <section className="section legal-page"><div className="container narrow"><span className="eyebrow eyebrow-blue">WEBSITE INFORMATION</span><h1>Privacy notice <em>(draft)</em></h1><p className="legal-warning">This is a working draft for the pre-launch website, not a complete legal policy. Company registration and contact details, data retention periods, hosting, analytics and any third-party processing must be verified before launch.</p>
-  <h2>Information you choose to share</h2><p>The enquiry form asks for your name, email address, and message, with optional company and telephone details. If you submit an enquiry after the email integration is configured, these details are sent to our configured enquiry mailbox via the provider specified in our deployment configuration.</p>
-  <h2>Availability checker</h2><p>The postcode checker is a placeholder pending wholesale integration. It does not currently provide real broadband availability or account registration. Once connected, the privacy notice must cover what location and address data is sent to wholesalers.</p>
-  <h2>Cookies and analytics</h2><p>This starter site does not intentionally install analytics or advertising cookies. Review this statement if analytics, marketing pixels, chat widgets or customer accounts are added.</p>
-  <h2>Your rights and questions</h2><p>The registered operating entity and privacy contact will be added before launch. In the meantime this page should not be treated as the final published privacy notice.</p><p><Link href="/contact" className="text-arrow">Contact Netlo</Link></p>
+
+export const metadata: Metadata = { title: "Privacy", description: "How Netlo handles information you share with us." };
+export default function Privacy() { return <section className="section legal-page"><div className="container narrow">
+  <span className="eyebrow eyebrow-blue">YOUR PRIVACY</span><h1>Privacy <em>matters.</em></h1>
+  <p>We aim to keep the information we collect limited to what we need to answer enquiries, provide connectivity services and support customers.</p>
+  <h2>Contact and enquiries</h2><p>When you contact us, we ask for your name, email address and message. You can also choose to share company details and a telephone number. We use those details to respond to your enquiry.</p>
+  <h2>Broadband availability</h2><p>When you submit a postcode or address for an availability check, we use it to identify the broadband options for that location. Where needed, these details may be shared securely with connectivity suppliers to carry out the check.</p>
+  <h2>Customer accounts</h2><p>Account sign-in is handled by a specialist authentication provider. We keep customer information limited to what's needed to operate and support the services you're authorised to use.</p>
+  <h2>Questions about your information</h2><p>You can contact us with questions about the information you've provided.</p><p><Link href="/contact" className="text-arrow">Contact Netlo →</Link></p>
 </div></section>; }

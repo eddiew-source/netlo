@@ -1,10 +1,11 @@
+import { readJsonInput, HttpInputError } from "@/lib/http-input";
 import { NextResponse } from "next/server";
 import { getConnectivityProvider } from "@/lib/connectivity/provider";
 import { normaliseUKPostcode } from "@/lib/connectivity/postcode";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
   let body: unknown;
-  try { body = await request.json(); } catch { return NextResponse.json({ error: "Invalid JSON" }, { status: 400 }); }
+  try { body = await readJsonInput(request, 800); } catch (error) { return NextResponse.json({ error: error instanceof HttpInputError ? error.message : "Invalid request" }, { status: error instanceof HttpInputError ? error.status : 400 }); }
   const raw = typeof body === "object" && body !== null && "postcode" in body ? (body as { postcode: unknown }).postcode : null;
   const postcode = typeof raw === "string" ? normaliseUKPostcode(raw) : null;
   if (!postcode) return NextResponse.json({ error: "Enter a valid UK postcode." }, { status: 400 });

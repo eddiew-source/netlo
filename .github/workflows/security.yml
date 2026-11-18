@@ -1,0 +1,30 @@
+name: Security and build checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  audit-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout reviewed code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up Node.js 26 LTS
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '26'
+          cache: npm
+      - name: Install reproducibly from committed lockfile
+        run: npm ci
+      - name: Check for high and critical dependency advisories
+        run: npm audit --audit-level=high
+      - name: Type-check
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'

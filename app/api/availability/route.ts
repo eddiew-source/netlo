@@ -1,9 +1,10 @@
+import { readJsonInput, HttpInputError } from "@/lib/http-input";
 import { NextResponse } from "next/server";
 import { getConnectivityProvider } from "@/lib/connectivity/provider";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
   let body: unknown;
-  try { body = await request.json(); } catch { return NextResponse.json({ error: "Invalid JSON" }, { status: 400 }); }
+  try { body = await readJsonInput(request, 3500); } catch (error) { return NextResponse.json({ error: error instanceof HttpInputError ? error.message : "Invalid request" }, { status: error instanceof HttpInputError ? error.status : 400 }); }
   const id = typeof body === "object" && body !== null && "premisesId" in body ? (body as { premisesId: unknown }).premisesId : null;
   if (typeof id !== "string" || id.length === 0 || id.length > 2800) return NextResponse.json({ error: "A valid premises identifier is required." }, { status: 400 });
   const provider = getConnectivityProvider();

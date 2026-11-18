@@ -24,9 +24,7 @@ export default function Home() {
           <div className="hero-footnote">For one office, a growing team or a whole estate of locations.</div>
         </div>
         <div className="hero-visual hero-visual-v2">
-          <span className="hero-visual-kicker">UK CONNECTIVITY</span>
-          <Image className="hero-map" src="/assets/uk-network.jpg" alt="Illustrative map of connected locations around the UK" width={780} height={530} priority />
-          <span className="hero-visual-caption">Designed around where your business operates.</span>
+          <Image className="hero-map" src="/assets/uk-network-hero.png" alt="Illustrative map of connected locations around the UK" width={1672} height={941} priority />
         </div>
       </div>
     </section>
