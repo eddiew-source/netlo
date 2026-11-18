@@ -1,6 +1,6 @@
 # Netlo — business-first marketing website
 
-A Next.js App Router / TypeScript rebuild of the Netlo static prototype. The design uses the approved **netlo.** blue-dot identity, corporate navy/blue palette and UK network-map graphic. It is **not** an order-management system yet.
+A Next.js App Router / TypeScript rebuild of the Netlo static prototype, with residential broadband and Clerk portal foundations. The design uses the approved **netlo.** blue-dot identity, corporate navy/blue palette and UK network-map graphic. It is **not** an order-management system yet.
 
 ## Run locally
 
@@ -31,7 +31,8 @@ Deployment: works on a normal Next.js-compatible Node host (for example Vercel).
 - `/cybersecurity` — practical security services
 - `/about` — Netlo positioning and approach
 - `/contact` — enquiry form (server-side integration optional)
-- `/home-broadband` — secondary residential section
+- `/home-broadband` — dedicated residential section (also linked from top navigation and homepage)
+- `/sign-in`, `/sign-up`, `/portal` — Clerk sign-in and protected My Netlo account portal (requires chosen Clerk app keys)
 - `/privacy` — explicitly marked **draft** privacy notice
 - `/api/addresses` — postcode-to-address integration boundary
 - `/api/availability` — premises availability integration boundary
@@ -89,3 +90,7 @@ Before enabling, confirm ICUK auth, access carriers, product schemas, line insta
 - `public/assets/` — approved logos, favicon, UK-map imagery, social preview
 
 No PHP, CMS, database, checkout or API credentials are required for the marketing preview.
+
+## New integration work
+
+See **`NETLO-TODO.md`** and **`NETLO-SETUP.md`**. This revision uses the selected existing Clerk app and a typed ICUK API adapter. It does **not** include real Clerk credentials, wholesale reseller credentials, an actual verified customer-to-circuit database, or retail billing. The portal intentionally returns no customer data until customer ownership has been explicitly linked and verified.

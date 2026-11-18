@@ -38,6 +38,10 @@ export default function Home() {
         <div className="service-grid service-grid-v2">{services.map(item => <Link href={item.href} key={item.href} className="service-card service-card-v2"><div className="service-card-top"><span className="service-icon"><Icon name={item.icon as IconName}/></span><span className="service-index">{item.index}</span></div><div className="service-card-copy"><h3>{item.title}</h3><h4>{item.line}</h4><p>{item.description}</p></div><span className="card-link">Explore service <Icon name="arrow-up" /></span></Link>)}</div>
       </div>
     </section>
+    <section className="home-feature" aria-labelledby="netlo-home-heading"><div className="container home-feature-layout">
+      <div><span className="eyebrow">NETLO FOR HOME</span><h2 id="netlo-home-heading">Good broadband.<br/><span>Less bother.</span></h2><p>Home internet should be simple to choose and easy to live with. We’re putting together straightforward fibre broadband options, backed by people who understand the network.</p><Link href="/home-broadband" className="btn btn-secondary">Explore Netlo Home <Icon name="arrow" /></Link></div>
+      <div className="home-feature-aside"><span>HOME BROADBAND</span><strong>Internet for real life.</strong><p>Working from home, streaming or just keeping everything connected. Check your postcode and we'll help with the options.</p><a href="#availability">Check broadband availability →</a></div>
+    </div></section>
     <section className="section difference-section difference-section-v2">
       <div className="container difference-layout difference-layout-v2">
         <div className="difference-copy"><span className="eyebrow eyebrow-blue">WHY IT MATTERS</span><h2>A broadband line is only <span>part of the story.</span></h2><p>Good connectivity should quietly keep the rest of your business running. That takes more than a speed test and a router in a box.</p><div className="difference-list">

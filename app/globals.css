@@ -163,3 +163,56 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
 @media(max-width:1180px){.desktop-nav-v2{gap:17px}.nav-actions-v2 .home-link{display:none}.nav-wrap-v2{gap:27px}.hero-v2 h1{font-size:58px}.difference-layout-v2{gap:50px}}
 @media(max-width:1020px){.nav-wrap-v2{height:72px}.desktop-nav-v2,.nav-actions-v2{display:none}.hero-layout-v2{grid-template-columns:1fr;padding-top:40px;min-height:0}.hero-v2 .hero-copy{padding-top:0}.hero-v2 .hero-buttons{margin-bottom:14px}.hero-visual-v2{height:260px;border-left:0}.hero-visual-v2 .hero-map{width:760px;height:345px}.hero-visual-caption{bottom:16px}.availability-shell{grid-template-columns:1fr;gap:20px}.service-card-v2:nth-child(n){grid-column:span 6}.difference-layout-v2{grid-template-columns:1fr}.network-story{min-height:350px}}
 @media(max-width:720px){.nav-wrap-v2{height:66px}.nav-wrap-v2 .logo-link img{width:124px}.hero-layout-v2{padding-top:48px}.hero-v2 h1{font-size:clamp(42px,10vw,54px);margin:23px 0 21px}.hero-v2 .hero-lede{font-size:14px}.hero-v2 .hero-buttons{margin:24px 0 16px}.hero-footnote{font-size:10px}.hero-visual-v2{height:210px}.hero-visual-kicker{left:0;top:8px}.hero-visual-caption{left:0;bottom:5px}.hero-visual-v2 .hero-map{width:530px;height:240px}.availability{padding-bottom:3px}.availability-shell{padding:22px 18px 17px}.availability-left h2{font-size:18px}.availability-left p{font-size:11px}.proof-strip-v2 .proof-grid>div{padding:0 6px}.service-grid-v2{grid-template-columns:1fr}.service-card-v2:nth-child(n){grid-column:1;min-height:280px}.service-card-v2{padding:25px}.network-story{padding:28px 27px;min-height:330px}.network-story-line{left:39px;top:98px;bottom:50px}.network-story-item{gap:18px}.difference-layout-v2{gap:27px}.solutions-section-v2 .section-heading>p{color:#c1d3e1}}
+/* My Netlo + residential — use restrained blues rather than introducing a new brand language. */
+.portal-nav-link{display:inline-flex;align-items:center;color:#d6e5f3;font-size:13px;font-weight:600;white-space:nowrap;text-decoration:none}
+.portal-nav-link:hover{color:white}
+.clerk-navigation{display:flex;align-items:center;gap:13px}
+.auth-page,.portal-page{background:#dce7ee;color:#112e46;min-height:65vh;padding:72px 0 95px}
+.auth-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,460px);gap:70px;align-items:start}
+.auth-layout h1{font-size:clamp(48px,6vw,78px);line-height:1.1;margin:22px 0 25px;letter-spacing:-.04em}
+.auth-layout h1 em{font-style:normal;color:#3f8cbd}
+.auth-layout p{line-height:1.8;color:#526d80;max-width:490px}
+.auth-panel{min-height:430px;display:flex;justify-content:center;align-items:flex-start}
+.portal-heading{display:flex;align-items:center;justify-content:space-between;gap:30px;margin-bottom:46px}
+.portal-heading h1,.portal-content>h1{font-size:clamp(40px,5vw,62px);letter-spacing:-.04em;margin:15px 0 10px}
+.portal-heading p{color:#526e81}
+.portal-empty{background:#f0f5f8;padding:42px 46px;border:1px solid #bdcfda;border-radius:5px;max-width:880px}
+.portal-empty h2{font-size:29px;margin:17px 0}
+.portal-empty p{max-width:650px;line-height:1.7;color:#557287;margin-bottom:26px}
+.portal-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:30px 0}
+.portal-tools>div,.portal-service{padding:30px;background:#d1e1ea;border:1px solid #afc8d8;border-radius:5px}
+.portal-tool-mark{font-size:12px;color:#397aa3;font-weight:800;letter-spacing:.1em}
+.portal-tools h3{font-size:22px;margin:18px 0 10px}
+.portal-tools p{font-size:13px;line-height:1.65;color:#47687c;min-height:64px}
+.portal-tools small,.portal-tools a{color:#35799f;font-size:12px}
+.portal-privacy-note{font-size:12px;color:#607989;line-height:1.5}
+.portal-service-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.home-feature{background:#0b263f;color:#eaf4fb;padding:78px 0 84px;border-top:1px solid #335472}
+.home-feature-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:90px;align-items:center}
+.home-feature .eyebrow{font-size:11px;letter-spacing:.16em;color:#91c4e8}
+.home-feature h2{font-size:clamp(38px,4.8vw,61px);line-height:1.16;letter-spacing:-.035em;margin:21px 0}
+.home-feature h2 span{color:#8dc7f0}
+.home-feature p{line-height:1.8;color:#b7ccdc;max-width:530px;font-size:15px}
+.home-feature .btn{margin-top:18px}
+.home-feature-aside{border:1px solid #39607a;background:#16374f;padding:35px 40px;border-radius:5px}
+.home-feature-aside span{display:block;font-size:10px;letter-spacing:.19em;color:#91caef;font-weight:700;margin-bottom:30px}
+.home-feature-aside strong{font-size:29px;display:block;letter-spacing:-.02em}
+.home-feature-aside p{font-size:13px;margin:13px 0 27px}
+.home-feature-aside a{font-size:13px;color:#a8d9f7;font-weight:700}
+.home-points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin:40px 0}
+.home-points>div{border-top:1px solid #7fa5bb;padding:22px 0}
+.home-points strong{color:#1c577f}
+.home-points p{font-size:13px;line-height:1.7;color:#557286}
+.availability-address-list{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding-top:16px}
+.availability-address-list label{font-weight:700;font-size:13px;color:#edf7ff}
+.availability-address-list select{flex:1 1 300px;min-width:0;height:45px;padding:0 12px;background:#ecf4fa;color:#102e47;border:1px solid #9bb9d0;border-radius:4px}
+.availability-offers{grid-column:1/-1;padding-top:13px}
+.availability-offers h3{color:white;font-size:18px;margin-bottom:12px}
+.availability-offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.availability-offer{background:#204660;border:1px solid #4d7794;padding:20px;border-radius:5px;display:grid;gap:9px}
+.availability-offer strong{font-size:14px;color:#eaf6fd}
+.availability-offer span{font-size:13px;color:#b5d9ef}
+.availability-offer small{color:#85bbdd}
+@media(max-width:1180px){.nav-wrap-v2{gap:22px}.desktop-nav-v2{gap:17px}.portal-nav-link{font-size:12px}}
+@media(max-width:1020px){.auth-layout,.home-feature-layout{grid-template-columns:1fr;gap:35px}.portal-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.auth-page,.portal-page{padding:45px 0 75px}.portal-heading{align-items:flex-start;flex-direction:column}.portal-empty{padding:28px 24px}.portal-tools,.portal-service-list,.home-points,.availability-offer-grid{grid-template-columns:1fr}.home-feature{padding:55px 0}.home-feature-aside{padding:27px}.availability-address-list .btn{width:100%}}

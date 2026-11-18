@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Header } from "@/components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -16,5 +17,7 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#071b32" };
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return <html lang="en-GB"><body><Header /><main id="main">{children}</main><Footer /></body></html>;
+  const authEnabled = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY);
+  const content = <><Header authEnabled={authEnabled} /><main id="main">{children}</main><Footer /></>;
+  return <html lang="en-GB"><body>{authEnabled ? <ClerkProvider>{content}</ClerkProvider> : content}</body></html>;
 }
