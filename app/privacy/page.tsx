@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+export const metadata: Metadata = { title: "Privacy notice (draft)", description: "Draft privacy notice for the Netlo pre-launch marketing website." };
+export default function Privacy() { return <section className="section legal-page"><div className="container narrow"><span className="eyebrow eyebrow-blue">WEBSITE INFORMATION</span><h1>Privacy notice <em>(draft)</em></h1><p className="legal-warning">This is a working draft for the pre-launch website, not a complete legal policy. Company registration and contact details, data retention periods, hosting, analytics and any third-party processing must be verified before launch.</p>
+  <h2>Information you choose to share</h2><p>The enquiry form asks for your name, email address, and message, with optional company and telephone details. If you submit an enquiry after the email integration is configured, these details are sent to our configured enquiry mailbox via the provider specified in our deployment configuration.</p>
+  <h2>Availability checker</h2><p>The postcode checker is a placeholder pending wholesale integration. It does not currently provide real broadband availability or account registration. Once connected, the privacy notice must cover what location and address data is sent to wholesalers.</p>
+  <h2>Cookies and analytics</h2><p>This starter site does not intentionally install analytics or advertising cookies. Review this statement if analytics, marketing pixels, chat widgets or customer accounts are added.</p>
+  <h2>Your rights and questions</h2><p>The registered operating entity and privacy contact will be added before launch. In the meantime this page should not be treated as the final published privacy notice.</p><p><Link href="/contact" className="text-arrow">Contact Netlo</Link></p>
+</div></section>; }
