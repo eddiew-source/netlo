@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/ServicePage";
-export const metadata: Metadata = { title: "Resilient networks & connectivity failover", description: "Managed networks, site-to-site connectivity and broadband failover designed around business continuity." };
+export const metadata: Metadata = { title: "Managed networks, SD-WAN & internet failover", description: "Multi-site networks, secure SD-WAN, managed firewalls and backup connectivity designed to reduce disruption." };
 export default function ResilientNetworks() { return <ServicePage
-  eyebrow="RESILIENT NETWORKS" title="Stay connected" accent="when it counts."
-  intro="A reliable business network takes more than an internet line. We look at your sites, backup options, routers and the services you depend on."
-  bullets={["Primary and backup connectivity", "4G/5G failover options", "Managed firewalls and routers", "Multi-site networking and SD-WAN"]}
+  enquiryService="Resilient networks & failover"
+  eyebrow="NETWORKS & BUSINESS CONTINUITY" title="Keep your sites" accent="working together."
+  intro="Internet access is only one part of a business network. We design the routing, security, monitoring and failover around the people and applications that depend on it."
+  bullets={["Fixed-line and 4G/5G backup options", "Managed routers and firewalls", "Site-to-site VPNs and SD-WAN", "Monitoring and network change management"]}
   features={[
-    { icon:"network", title:"Automatic failover",description:"Design for a second connection to take over if a primary circuit fails, subject to coverage, equipment and service design." },
-    { icon:"shield",title:"Managed edge",description:"Routers and firewalls managed as part of the service, with a clear approach to changes and support." },
-    { icon:"layers",title:"Multi-site networks",description:"Connect branches and offices with an architecture that suits your applications and security requirements." },
-    { icon:"server",title:"Visibility and monitoring",description:"Monitor availability and faults so issues are easier to identify and resolve." },
+    {icon:"network",title:"Multi-site networking",description:"Bring branches, offices and cloud services together using networking suited to your operational requirements."},
+    {icon:"shield",title:"Secure edge",description:"Firewall policies, segmentation, secure access and managed routing with responsibilities agreed upfront."},
+    {icon:"layers",title:"Designed-in resilience",description:"Compare backup broadband, mobile connectivity or diverse leased lines rather than relying on one circuit."},
+    {icon:"server",title:"Useful visibility",description:"Connection monitoring, alerting and a clear escalation process so faults don't become a guessing game."},
   ]}
-  detailTitle="Design resilience around the risk."
-  detailCopy="Not every business needs the same backup design. We'll weigh up site importance, available circuits, mobile signal, applications and what an outage actually costs you."
-  detailPoints={["Independent access where feasible", "Backup circuit and mobile options", "Clear failover expectations", "Firewall and routing design", "Monitoring and support scope agreed upfront"]}
+  detailTitle="Resilience starts with design."
+  detailCopy="Not every site needs a complex SD-WAN. We'll identify the applications that matter, assess failure scenarios, then select a proportionate network and backup design."
+  detailPoints={["Connectivity and site survey", "Primary and backup route design", "Firewall and SD-WAN platform selection", "Monitoring, alerting and change control", "Recovery testing and support scope"]}
+  showAvailability
   faqs={[
-    {question:"Does a 4G or 5G backup guarantee no downtime?",answer:"No. Switchover, signal coverage, congestion and individual application behaviour can affect service. We'll explain the design and its limitations."},
-    {question:"Can you manage our existing firewall?",answer:"Potentially. We'll review the platform, licensing, access and support responsibilities before quoting."},
-    {question:"Do we need SD-WAN?",answer:"Not necessarily. The simplest architecture that meets the business requirement is usually the best starting point."},
+    {question:"Does automatic failover mean zero downtime?",answer:"No. Switchovers depend on router behaviour, the backup service, signal quality and application sessions. We'll explain likely behaviour before implementation."},
+    {question:"Do we have to change all our existing circuits?",answer:"Not necessarily. We can assess the current estate and work out which links need replacing or supplementing."},
+    {question:"Can Netlo manage existing networking equipment?",answer:"Potentially, depending on the platform, licensing, access and responsibilities. We'll review the environment before quoting."},
   ]}
 />; }

@@ -219,3 +219,29 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
 
 /* UK map artwork: real alpha transparency, no rectangular JPEG or faded screenshot treatment. */
 .inner-art img{object-fit:contain;filter:drop-shadow(0 0 18px rgba(35,138,230,.23));mix-blend-mode:normal;mask-image:none;opacity:1}
+
+/* V5: business voice, consultancy and service discovery */
+.additional-offers{background:#d8e4eb;color:#102e47}
+.additional-offers .section-heading>p{color:#4d6b81}
+.offer-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.offer-links>a{min-width:0;display:grid;grid-template-columns:40px minmax(0,1fr) 20px;grid-template-rows:auto auto;gap:7px 15px;align-items:center;background:#ecf3f8;border:1px solid #bbd1e0;color:#122f47;text-decoration:none;padding:24px;border-radius:5px;transition:border-color .2s,transform .2s}
+.offer-links>a:hover,.offer-links>a:focus-visible{border-color:#409edc;transform:translateY(-2px)}
+.offer-links strong{font-size:17px;letter-spacing:-.025em}
+.offer-links small{font-size:12px;line-height:1.5;color:#526f84;grid-column:2;grid-row:2}
+.offer-links .offer-link-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #b7d7ec;border-radius:5px;color:#0e82cb;background:#dcedf8;grid-column:1;grid-row:1 / span 2}
+.offer-links>a>.icon{color:#167cbd;width:19px;height:19px;grid-column:3;grid-row:1 / span 2}
+.voice-hero-aside{align-self:center;background:#153650;border:1px solid #335a78;border-radius:6px;padding:37px 42px;color:#edf6fc;max-width:530px}
+.voice-hero-aside>span{display:block;color:#98c6e4;font-size:10px;letter-spacing:.16em;font-weight:750;margin-bottom:20px}
+.voice-hero-aside strong{font-size:clamp(25px,2.6vw,37px);letter-spacing:-.04em;line-height:1.18;display:block}
+.voice-hero-aside p{color:#b9d1e1;line-height:1.75;font-size:14px;margin:22px 0 0}
+.communications-extras{background:#152f47;color:#f0f8ff}
+.communications-extras .eyebrow-blue{color:#9acdf2}
+.communications-extras h2 span{color:#9cd0f1}
+.extra-services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:33px}
+.extra-services-grid article{background:#1c3b55;border:1px solid #3b607d;padding:28px;border-radius:5px}
+.extra-services-grid article>.icon{width:29px;height:29px;color:#80c4f0}
+.extra-services-grid h3{font-size:19px;margin:24px 0 8px;letter-spacing:-.025em}
+.extra-services-grid p{font-size:13px;color:#b8cbdc;line-height:1.7;margin:0}
+.communications-extras .small-print{color:#9bb6ca;font-size:12px;margin-top:24px}
+@media(max-width:1020px){.offer-links{grid-template-columns:repeat(2,minmax(0,1fr))}.voice-hero-aside{max-width:680px;margin-bottom:20px}}
+@media(max-width:720px){.offer-links,.extra-services-grid{grid-template-columns:1fr}.offer-links>a{padding:20px}.voice-hero-aside{padding:28px;margin-top:15px}}

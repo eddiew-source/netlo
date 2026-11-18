@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "security:check": "npm audit --audit-level=high && npm run typecheck && npm run build"
+    "security:check": "npm audit --audit-level=high && npm run typecheck && npm run test:security && npm run build",
+    "test:security": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

@@ -36,6 +36,16 @@ export default function Home() {
         <div className="service-grid service-grid-v2">{services.map(item => <Link href={item.href} key={item.href} className="service-card service-card-v2"><div className="service-card-top"><span className="service-icon"><Icon name={item.icon as IconName}/></span><span className="service-index">{item.index}</span></div><div className="service-card-copy"><h3>{item.title}</h3><h4>{item.line}</h4><p>{item.description}</p></div><span className="card-link">Explore service <Icon name="arrow-up" /></span></Link>)}</div>
       </div>
     </section>
+    <section className="section additional-offers" aria-labelledby="additional-offers-title">
+      <div className="container">
+        <div className="section-heading compact"><div><span className="eyebrow eyebrow-blue">MORE WAYS WE HELP</span><h2 id="additional-offers-title">Specialist help when <span>you need it.</span></h2></div><p>From replacing a phone system to planning a major infrastructure change, you can come to Netlo for the whole job or a defined piece of it.</p></div>
+        <div className="offer-links">
+          <Link href="/leased-lines"><span className="offer-link-icon"><Icon name="network"/></span><strong>Leased lines &amp; Ethernet</strong><small>Dedicated internet and point-to-point circuits</small><Icon name="arrow"/></Link>
+          <Link href="/business-voice"><span className="offer-link-icon"><Icon name="phone"/></span><strong>VoIP &amp; business phones</strong><small>Hosted systems, SIP trunks and business numbers</small><Icon name="arrow"/></Link>
+          <Link href="/consultancy"><span className="offer-link-icon"><Icon name="briefcase"/></span><strong>IT consultancy</strong><small>Design, migrations, audits and technical leadership</small><Icon name="arrow"/></Link>
+        </div>
+      </div>
+    </section>
     <section className="home-feature" aria-labelledby="netlo-home-heading"><div className="container home-feature-layout">
       <div><span className="eyebrow">NETLO FOR HOME</span><h2 id="netlo-home-heading">Good broadband.<br/><span>Less bother.</span></h2><p>Home internet should be simple to choose and easy to live with. We’re putting together straightforward fibre broadband options, backed by people who understand the network.</p><Link href="/home-broadband" className="btn btn-secondary">Explore Netlo Home <Icon name="arrow" /></Link></div>
       <div className="home-feature-aside"><span>HOME BROADBAND</span><strong>Internet for real life.</strong><p>Working from home, streaming or just keeping everything connected. Check your postcode and we'll help with the options.</p><a href="#availability">Check broadband availability →</a></div>

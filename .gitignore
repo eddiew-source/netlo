@@ -1,9 +1,11 @@
-node_modules
-.next
-out
+node_modules/
+.next/
+out/
+.vercel/
+.clerk/
 .env
-.env.*.local
+.env.*
+!.env.example
 *.tsbuildinfo
 .DS_Store
-
-.env.local
+npm-debug.log*

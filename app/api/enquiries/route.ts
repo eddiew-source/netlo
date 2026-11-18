@@ -1,5 +1,6 @@
 import { readJsonInput, HttpInputError } from "@/lib/http-input";
 import { NextResponse } from "next/server";
+import { isEnquiryService } from "@/lib/enquiry-services";
 export const runtime = "nodejs";
 
 type Enquiry = { name: string; email: string; company: string; phone: string; service: string; message: string; website?: string };
@@ -23,6 +24,12 @@ export async function POST(request: Request) {
   if (enquiry.website) return NextResponse.json({ status: "ok" }); // honeypot
   if (!enquiry.name || !enquiry.message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enquiry.email)) {
     return NextResponse.json({ error: "Name, valid email and message are required." }, { status: 400 });
+  }
+  if (!isEnquiryService(enquiry.service)) return NextResponse.json({ error: "Choose a valid enquiry type." }, { status: 400 });
+  // Never expose an operational outbound mail endpoint merely by adding API keys.
+  // Enable only after production abuse controls / rate limiting are verified.
+  if (process.env.NETLO_PUBLIC_ENQUIRIES_ENABLED !== 'true') {
+    return NextResponse.json({ error: "Online enquiries aren't available right now. Please try again later." }, { status: 503 });
   }
   const key = process.env.RESEND_API_KEY, from = process.env.ENQUIRY_FROM_EMAIL, to = process.env.ENQUIRY_TO_EMAIL;
   if (!key || !from || !to) return NextResponse.json({ error: "Online enquiries aren't enabled yet. Please try again later." }, { status: 503 });

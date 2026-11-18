@@ -1,43 +1,54 @@
-# Netlo Clerk + ICUK setup
+# Netlo setup (internal)
 
-This is the Next.js 16 marketing site plus **portal foundations**. The project was built from the V2 design, not a live Mac repository checkout.
+The project targets Next.js 16.4.6, Clerk SDK 7.10.2, React 19.3.1 and Node.js 26.
+The existing Clerk application is `app_3MGoc8G1Oo4Az3UssZ2MGbhQNdt`.
+Do not run unqualified `clerk init` or create another application.
 
-## Clerk: selected existing application
-
-The selected Clerk app is `app_3MGoc8G1Oo4Az3UssZ2MGbhQNdt`. **Do not run `clerk init` without `--app`,** or create a replacement app. The current code already has the provider, Next.js proxy, and auth pages. From the project directory, run:
+## Local development
 
 ```sh
+nvm install 26
+nvm use 26
 npm install
 npx -y clerk@latest auth login
 npx -y clerk@latest link --app app_3MGoc8G1Oo4Az3UssZ2MGbhQNdt
 npx -y clerk@latest env pull
-npx -y clerk@latest doctor
-npm run typecheck
-npm run build
+npm run security:check
 npm run dev
 ```
 
-The local sign-in should then work at `/sign-in`, with account creation at `/sign-up` and the portal at `/portal`. Do not print or commit your `.env.local` contents. Configure the matching production keys through Clerk deployment and Vercel environment management only after confirming the correct Vercel project. When Clerk keys are absent, the marketing website stays accessible and the portal honestly says it isn't configured.
-
-To enable organisations later, run `npx -y clerk@latest enable orgs`, then define verified account membership rules and test them before showing another user’s circuits. Do not rely on `orgId` alone for permission to view service data.
+Configure local secrets in `.env.local` ONLY. Make sure `.env.local` is not
+tracked (`git ls-files --error-unmatch .env.local` should fail). If it was
+previously public, rotate all actual credentials; removing it from HEAD does
+not remove it from repository history.
 
 ## ICUK
 
-Confirmed against public ICUK PHP OpenAPI-generated docs:
+Configure the actual API base URL, access token, environment, and an address
+signing secret server-side only. The public ICUK OpenAPI sample is not a
+production API host. API access and live response schemas must be verified
+against the reseller test account first. Lookups are OFF unless explicitly
+activated with `NETLO_PUBLIC_LOOKUPS_ENABLED=true` after enabling WAF and
+rate limiting. A real pricing layer and quote flow still need implementing.
 
-- `GET /broadband/address/{postcode}` — returns `addresses[]` with BT address properties
-- `POST /broadband/availability` — exact address lookup with `products[]`
-- `GET /broadband/online_status/{username}` — per-line online status
-- Additional documented APIs: usage, session history, IP allocation, line diagnostics and orders
+## Enquiries
 
-Authentication is OAuth2 Bearer, and the generated client sends the `ApiPlatform` header as `test` or `live`. Configure the **real reseller base URL and an access token** through `ICUK_API_BASE_URL` and `ICUK_ACCESS_TOKEN`. The API-generated docs use a placeholder localhost host; this project does **not** invent a production endpoint. The test environment is the default. Automatic token renewal is not implemented because the reseller token endpoint/flow has not yet been verified.
+Configure `RESEND_API_KEY`, `ENQUIRY_FROM_EMAIL` and `ENQUIRY_TO_EMAIL` on the
+server. Mail delivery is OFF until `NETLO_PUBLIC_ENQUIRIES_ENABLED=true`; do
+not enable until rate limits and bot controls are tested. Never use real
+customer email addresses in automated tests.
 
-The address API sends a signed, short-lived opaque token to the browser rather than trusting a browser-submitted BT address. Set a server-only random `NETLO_LOOKUP_SIGNING_SECRET` of at least 32 characters and use the same secret for all Vercel instances. Availability lists only products the wholesale API marks available; **prices and confirmed provisionability are not implied**.
+## Portal
 
-Portal circuit APIs fail closed until real verified customer-service mappings exist. No username from query strings or browser input is forwarded to ICUK. Billing returns an explicit unavailable response; ICUK reseller bills must not be mistaken for retail customer invoices.
+Clerk identifies users. The Netlo datastore must separately establish verified
+account memberships and circuit ownership. The SQL schema in `database/` is
+an unexecuted design. Portal requests deny access by default until this mapping
+has been implemented and cross-tenant tests are passing. Billing requires a
+retail customer billing provider or retail-safe ICUK integration.
 
-## Status
+## Git and CI
 
-The published code is **source-ready but not production-tested**. This environment could not reach the npm registry, so the Clerk CLI and install/build could not complete. Test with real credentials and the actual reseller test platform before enabling customer traffic.
-
-Sources: https://clerk.com/docs/nextjs/getting-started/quickstart and https://github.com/ICUK-Net/icuk-api-php
+Run `npm install` to generate `package-lock.json`, then commit it alongside
+this release. GitHub Actions rejects a missing lockfile to avoid unpredictable
+transitive dependencies. Vercel should not be allowed to publish customer
+features until security checks and legal/operational launch gates pass.

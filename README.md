@@ -1,97 +1,51 @@
-> **Security / release:** This is a development candidate, not security-certified. Read `SECURITY-REVIEW.md` and `NETLO-V4-NOTES.md` before deploying.
+# Netlo — Next.js marketing site and customer-portal foundation
 
-# Netlo — business-first marketing website
+Business-first Netlo site with residential broadband, connectivity, voice,
+managed IT, security and consultancy. No wholesale order automation, customer
+billing or verified circuit datastore is live yet.
 
-A Next.js App Router / TypeScript rebuild of the Netlo static prototype, with residential broadband and Clerk portal foundations. The design uses the approved **netlo.** blue-dot identity, corporate navy/blue palette and a transparent, high-contrast UK network illustration (not the old framed JPEG). It is **not** an order-management system yet.
+## Run the site
 
-## Run locally
-
-Requirements: Node.js 26 LTS and npm. From the project directory:
+Use Node.js 26 (see `.nvmrc`) and npm:
 
 ```sh
-cp .env.example .env.local
 npm install
 npm run dev
-```
-
-Visit `http://localhost:3000`. For production builds:
-
-```sh
 npm run security:check
-npm start
 ```
 
-Deployment: works on a normal Next.js-compatible Node host (for example Vercel). The domain `netlo.uk` is configured in the sample environment settings; connect DNS separately when ready.
+**Commit the generated `package-lock.json`** after a reviewed install. GitHub
+Actions requires it, and runs `npm ci`, `npm audit --audit-level=high`, TypeScript,
+security regression tests and a production build. Never commit `.env.local`.
 
-## Included routes
+## Marketing pages
 
-- `/` — marketing homepage, prominent postcode checker, services, business benefits and lead-generation CTAs
-- `/business-broadband` — broadband and leased lines
-- `/resilient-networks` — failover, SD-WAN and managed networking
-- `/managed-it` — managed support, infrastructure and cloud
-- `/cybersecurity` — practical security services
-- `/about` — Netlo positioning and approach
-- `/contact` — enquiry form (server-side integration optional)
-- `/home-broadband` — dedicated residential section (also linked from top navigation and homepage)
-- `/sign-in`, `/sign-up`, `/portal` — Clerk sign-in and protected My Netlo account portal (requires chosen Clerk app keys)
-- `/privacy` — public-facing privacy information (requires formal legal review before launch)
-- `/api/addresses` — postcode-to-address integration boundary
-- `/api/availability` — premises availability integration boundary
-- `/api/enquiries` — validated server-side email submission (Resend, once configured)
+- `/` — business-first homepage and prominent postcode checker
+- `/business-broadband` — business FTTP and address-dependent broadband
+- `/leased-lines` — dedicated internet and point-to-point Ethernet
+- `/business-voice` — hosted VoIP, SIP trunks, numbers, SMS, fax-to-email
+- `/resilient-networks` — backup connectivity, multi-site networking, managed firewall
+- `/managed-it` — ongoing IT and infrastructure support
+- `/cybersecurity` — security planning and implementation
+- `/consultancy` — architecture, migrations, project work, fractional leadership
+- `/home-broadband` — Netlo Home residential services
+- `/about`, `/contact`, `/privacy` — information and customer enquiry
 
-## What works today
+Web hosting, domain registration and VPS are intentionally excluded.
 
-- Responsive, accessible navigation and marketing pages
-- Frontend UK postcode formatting and validation
-- `/api/addresses` accepts a postcode but clearly returns HTTP 503 / `coming_soon` before ICUK setup
-- `/api/availability` similarly returns 503 until a real wholesale provider is wired in
-- Manual-check link sends the postcode to the enquiry page
-- Enquiry form performs client + server validation, honeypot protection, and gives an **honest 503 error** until outbound email credentials are configured
-- Per-page metadata, sitemap, robots and Open Graph image
-- Clerk sign-in and portal foundations in source; customer account-to-circuit mapping is intentionally disabled until verified
+## Customer platform
 
-## Configure the enquiry form
+- `/sign-in`, `/sign-up` and `/portal` — Clerk authentication and portal shell
+- `/api/addresses` and `/api/availability` — ICUK API adapter, disabled by
+  default until `NETLO_PUBLIC_LOOKUPS_ENABLED=true` and reseller configuration
+- `/api/enquiries` — server-side Resend email; disabled by default until
+  `NETLO_PUBLIC_ENQUIRIES_ENABLED=true` and verified anti-abuse controls
+- `/api/portal/services` and service status — authenticated but **fail closed**
+  until verified account-to-circuit mappings exist
+- `/api/portal/billing` — explicit unavailable response, not invented bills
+- `database/001_customer_access.sql` — minimal mapping design, NOT executed
 
-The form uses the Resend HTTP API from the **server only**, without additional packages. Set these **server-side** environment variables:
+See `NETLO-SETUP.md`, `NETLO-TODO.md`, `NETLO-V5-RELEASE.md`, and
+`SECURITY-REVIEW.md` for private implementation and launch requirements.
 
-- `RESEND_API_KEY`: Resend key
-- `ENQUIRY_FROM_EMAIL`: verified sender address, e.g. `Netlo <hello@your-verified-domain>`
-- `ENQUIRY_TO_EMAIL`: mailbox receiving enquiries
-
-These are not supplied in the project and should not be committed. Once configured, test delivery, spam handling, abuse prevention and retention. The current honeypot is a starting point, **not** production-grade anti-spam or distributed rate limiting. No submissions are stored in a database.
-
-## ICUK integration plan (not connected)
-
-`lib/connectivity/provider.ts` defines the provider adapter. It intentionally returns `null` until live documentation and credentials are available. The customer flow will be:
-
-1. `POST /api/addresses` with postcode → validate → call ICUK address lookup server-side → return premises IDs and readable addresses.
-2. Customer selects a premise from a list (new client UI to be added once API schemas are confirmed).
-3. `POST /api/availability` with premises ID → call ICUK server-side → normalise carrier results into Netlo product options.
-4. Apply **Netlo retail pricing rules** separately from wholesale costs. Never return wholesale prices or API keys to the browser.
-5. Initially submit a lead/quote request. Automated ordering, payments, accounts and service management are later phases.
-
-Before enabling, confirm ICUK auth, access carriers, product schemas, line installation fees, expected speeds, address ID formats, rate limits, caching, retries, error codes and order-status behaviour. Do **not** assume endpoints or credentials based on public examples. Implement API throttling/abuse controls and privacy/legal updates when live lookup is added.
-
-## Before launching
-
-- Confirm and publish business legal identity, address, contact details and a reviewed privacy/complaints policy
-- Complete ICUK reseller commercial and API onboarding
-- Connect and test a verified contact mailbox
-- Add bot protection / robust rate limiting to forms
-- Review copy against service offerings and support capabilities
-- When ready to be indexed, set `NEXT_PUBLIC_SITE_LIVE=true`; before that, pages are marked `noindex` and `robots.txt` disallows crawling
-- Generate and commit `package-lock.json` with `npm install`, then run `npm run security:check` in an environment with registry access; verify desktop/mobile, Clerk login and rollout permissions
-
-## Design / structure
-
-- `app/` — Next.js routes, metadata, CSS and API endpoints
-- `components/` — reusable Header, Footer, CTA, checker, enquiry form, service-page template
-- `lib/site.ts` — navigation, service cards, site settings
-- `lib/connectivity/` — validation, wholesale adapter types and integration boundary
-- `public/assets/` — approved logos, favicon, UK-map imagery, social preview
-
-No PHP, CMS, database, checkout or API credentials are required for the marketing preview.
-
-## New integration work
-
-See **`NETLO-TODO.md`** and **`NETLO-SETUP.md`**. This revision uses the selected existing Clerk app and a typed ICUK API adapter. It does **not** include real Clerk credentials, wholesale reseller credentials, an actual verified customer-to-circuit database, or retail billing. The portal intentionally returns no customer data until customer ownership has been explicitly linked and verified.
+This project is not ready to handle real customer bills or network controls.

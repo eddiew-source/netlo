@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/ServicePage";
-export const metadata: Metadata = { title: "Managed IT services", description: "Practical managed IT, infrastructure, Microsoft 365 and cloud support from Netlo." };
+export const metadata: Metadata = { title: "Managed IT, Microsoft 365 & infrastructure", description: "Managed IT and technology support covering networks, Microsoft 365, devices, cloud infrastructure, backup and recovery." };
 export default function ManagedIT() { return <ServicePage
-  eyebrow="MANAGED IT" title="IT that works" accent="with your business."
-  intro="Get help with the everyday running of your systems, the infrastructure behind them and the changes needed as your business grows."
-  bullets={["Infrastructure and network management", "Microsoft 365 and cloud services", "Device and user support", "Projects, audits and ongoing advice"]}
+  enquiryService="Managed IT"
+  eyebrow="MANAGED IT & CLOUD" title="Good IT makes" accent="everything easier."
+  intro="We can take responsibility for an agreed part of your IT — from networks and infrastructure to Microsoft 365 and user support — without making things more complicated."
+  bullets={["IT support and administration", "Microsoft 365, identity and cloud", "Network, server and firewall management", "Backup, recovery and planned improvements"]}
   features={[
-    {icon:"headset",title:"Day-to-day support",description:"Practical assistance for users, devices and common business technology issues, within an agreed service scope."},
-    {icon:"server",title:"Infrastructure management",description:"Servers, networks, backup, monitoring and lifecycle management for your key systems."},
-    {icon:"cloud",title:"Cloud and Microsoft 365",description:"Help with cloud services, identity, Microsoft 365 administration and sensible improvements."},
-    {icon:"briefcase",title:"Technology leadership",description:"Technical reviews, roadmap planning and senior infrastructure input without needing a full-time specialist."},
+    {icon:"headset",title:"User and device support",description:"Help with everyday technology problems, devices, access and business applications within a defined support agreement."},
+    {icon:"cloud",title:"Microsoft 365 & cloud",description:"Tenant administration, identity, migration planning and cloud services aligned with the way teams work."},
+    {icon:"server",title:"Infrastructure operations",description:"Servers, virtualisation, network equipment, monitoring, lifecycle planning and service ownership."},
+    {icon:"shield",title:"Continuity & security",description:"Backups, recovery plans, firewall management and practical measures that reduce operational risk."},
   ]}
-  detailTitle="Support with a wider view."
-  detailCopy="We don't believe every problem can be solved with another helpdesk ticket. Some businesses need better processes, clearer ownership or more resilient infrastructure."
-  detailPoints={["Clearly defined support arrangements", "Proactive reviews where appropriate", "Infrastructure and cloud expertise", "Project and migration support", "A practical improvement roadmap"]}
+  detailTitle="Support that fits your business."
+  detailCopy="Some customers want an outsourced IT function; others need expert help with their networks or infrastructure while keeping their existing provider. We'll define coverage, priorities and responsibilities together."
+  detailPoints={["Clearly documented service scope", "Access and support responsibilities", "Incident and change processes", "Ongoing reviews and improvement planning", "Optional consultancy and migration projects"]}
   faqs={[
-    {question:"Can you support a business without replacing its existing IT provider?",answer:"Yes, depending on the scope. We can discuss specialist infrastructure, connectivity or project support alongside an existing team."},
-    {question:"Do you offer 24/7 support?",answer:"Not as a blanket promise. Coverage and response commitments need to be agreed and priced for each service."},
-    {question:"Can you start with an audit?",answer:"Yes. A scoped technology or resilience review is often a useful way to identify immediate priorities."},
+    {question:"Do you need to replace our existing IT team?",answer:"No. We can complement an existing team or MSP with specialist network, infrastructure or project support."},
+    {question:"Can you manage Microsoft 365?",answer:"We can discuss administration, identity, security baselines and migrations as part of a scoped managed service or project."},
+    {question:"Is out-of-hours support included?",answer:"Support hours, escalation paths and response commitments are agreed for each contract rather than assumed."},
   ]}
 />; }

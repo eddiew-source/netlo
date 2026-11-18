@@ -30,3 +30,22 @@
 - Clerk application linked to existing account; user/org association and MFA. Avoid client-side trust in `orgId` or claimed circuit references.
 - Billing: choose provider, minimise retained financial data, and meet required invoice record retention.
 - Separate customer-facing copy from integration/launch notes. Site must not imply live lookups until operational; provide a useful manual fallback upon attempted lookup.
+
+## Follow-up, 18 November 2026
+
+- GitHub Actions run 44266019242 failed during action setup because the checkout
+  commit SHA lacked its final three characters. This release supplies the full
+  SHA; the application was never audited by that failed run.
+- `.env.local` had been tracked in the public repository. Removal from HEAD is
+  necessary but insufficient: rotate any real secrets exposed in Git history.
+- `.gitignore` now excludes `.env.local` and all other `.env.*` except
+  `.env.example`; a source test asserts this remains the case.
+- Public lookup and outbound mail require explicit activation. These flags are
+  not substitutes for distributed rate limits, CAPTCHA/bot protection and logs.
+- ICUK response reading has a 256 KiB cap; wholesale credentials and raw
+  connection diagnostics do not get rendered to the browser.
+- Customer/account-to-circuit mapping remains deny-all until the datastore
+  exists. No invoices, line actions or account changes are enabled.
+- Offline source tests pass, but there is no clean npm audit or production
+  build result in the restricted workspace. Do not treat this as production
+  security certification.

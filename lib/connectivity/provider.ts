@@ -11,5 +11,5 @@ export interface ConnectivityProvider {
   checkAvailability(premisesId: string): Promise<Offer[]>;
 }
 export function getConnectivityProvider(): ConnectivityProvider | null {
-  return icukConfigured() && Boolean(process.env.NETLO_LOOKUP_SIGNING_SECRET && process.env.NETLO_LOOKUP_SIGNING_SECRET.length >= 32) ? icukConnectivityProvider : null;
+  return process.env.NETLO_PUBLIC_LOOKUPS_ENABLED === 'true' && icukConfigured() && Boolean(process.env.NETLO_LOOKUP_SIGNING_SECRET && process.env.NETLO_LOOKUP_SIGNING_SECRET.length >= 32) ? icukConnectivityProvider : null;
 }

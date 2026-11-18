@@ -33,5 +33,34 @@ async function icukRequest(method: 'GET' | 'POST', path: string, body?: object):
   if (!response.ok) throw new Error(`ICUK request failed (HTTP ${response.status})`);
   const contentType = response.headers.get('content-type') || '';
   if (!contentType.includes('json')) throw new Error('Unexpected ICUK response format');
-  return response.json() as Promise<unknown>;
+  return readBoundedJson(response);
+}
+
+/** Never allow a wholesale API to exhaust a serverless function with a huge body. */
+async function readBoundedJson(response: Response, maxBytes = 256 * 1024): Promise<unknown> {
+  const length = response.headers.get('content-length');
+  if (length && (!/^\d+$/.test(length) || Number(length) > maxBytes)) {
+    throw new Error('Oversized ICUK response');
+  }
+  if (!response.body) throw new Error('Empty ICUK response');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder('utf-8', { fatal: true });
+  let bytes = 0;
+  let content = '';
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > maxBytes) {
+        await reader.cancel();
+        throw new Error('Oversized ICUK response');
+      }
+      content += decoder.decode(value, { stream: true });
+    }
+    content += decoder.decode();
+    return JSON.parse(content) as unknown;
+  } finally {
+    reader.releaseLock();
+  }
 }

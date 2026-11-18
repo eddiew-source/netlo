@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/ServicePage";
-export const metadata: Metadata = { title: "Business broadband & leased lines", description: "UK business broadband, fibre and dedicated leased lines with straightforward advice from Netlo." };
+export const metadata: Metadata = { title: "Business FTTP, SOGEA & fibre broadband", description: "UK FTTP and business broadband, including SOGEA and other access options where available, with advice on the right connection for your site." };
 export default function BusinessBroadband() { return <ServicePage
-  eyebrow="BUSINESS BROADBAND & LEASED LINES" title="A better connection" accent="for your business."
-  intro="From a single office connection to multiple locations, we'll help you find connectivity that fits how your business works."
-  cta="Ask for a quote"
-  bullets={["Business fibre and broadband", "Dedicated Ethernet and leased lines", "Multi-site connectivity", "Options for mobile backup and static IPs"]}
+  enquiryService="Business broadband"
+  eyebrow="BUSINESS BROADBAND" title="A better connection" accent="for your business."
+  intro="Business internet should fit how you operate, not just a speed on an advert. We'll look at location, availability, usage and what happens if a connection goes down."
+  cta="Request a broadband quote"
+  bullets={["Full-fibre FTTP options", "SOGEA and other available broadband access", "Single or multi-site supply", "Static IP and resilient-network options"]}
   features={[
-    { icon:"wifi",title:"Business broadband",description:"Fibre and broadband options for offices, shops and growing teams, subject to local availability." },
-    { icon:"network",title:"Leased lines",description:"Dedicated Ethernet circuits when predictable capacity and a defined service arrangement matter." },
-    { icon:"server",title:"One site or many",description:"Talk to one team about connectivity across multiple locations rather than juggling different providers." },
-    { icon:"shield",title:"More than a circuit",description:"Add managed routers, security, monitoring and continuity options where they're needed." },
+    {icon:"wifi",title:"Full fibre (FTTP)",description:"High-speed fibre for offices, shops and businesses, with network and speed options determined by your address."},
+    {icon:"network",title:"Other access options",description:"SOGEA and other available broadband products for premises not yet served by the fibre package you want."},
+    {icon:"server",title:"For one site or many",description:"Simplify the purchasing and management of connectivity across branches, retail locations and offices."},
+    {icon:"shield",title:"Keep it working",description:"Add managed routers, static IP options, monitoring and secondary access where continuity matters."},
   ]}
-  detailTitle="Connectivity without the guesswork."
-  detailCopy="The right line depends on more than the headline speed. We'll talk through usage, critical systems, existing contracts and what happens if your primary connection fails."
-  detailPoints={["FTTP and other access products where available", "Quote-led leased-line options", "Installation and contract terms explained", "Optional network management and resilience", "No made-up availability or speeds"]}
+  detailTitle="The right product for each site."
+  detailCopy="A busy office, retail branch and warehouse do not all need the same circuit. We'll help you compare available broadband products and decide when to add resilience or step up to dedicated Ethernet."
+  detailPoints={["Full-fibre and copper-based access where available", "Availability checked at the property", "Clear installation and contract options", "Optional static IP and router management", "Leased-line and backup alternatives when appropriate"]}
+  showAvailability
   faqs={[
-    { question:"Can you provide broadband at my address?", answer:"Availability varies by property and access network. Enter your postcode above, or ask us to check the options for your address." },
-    { question:"Is a leased line the same as fibre broadband?", answer:"No. A leased line typically provides dedicated, business-focused connectivity with different commercial and service arrangements. We can explain when it's worth the additional cost." },
-    { question:"Can you connect multiple sites?", answer:"That is a core use case for Netlo. We can discuss the access circuits and the networking that links your locations together." },
-    { question:"Do you offer fixed prices online?", answer:"Pricing depends on the location, service type, installation requirements and contract term. We'll provide a clear quote before you commit." },
+    {question:"Can Netlo supply fibre at my address?",answer:"That depends on the property and the access networks serving it. Start with your postcode and we'll review the available options."},
+    {question:"Can we keep our existing IP address?",answer:"Static IP options depend on the service and how your existing network is configured. We'll review that as part of a migration."},
+    {question:"What if our internet is business-critical?",answer:"We can look at a backup circuit, mobile failover or a dedicated leased line alongside the primary connection."},
+    {question:"Are all speeds available everywhere?",answer:"No. Headline speeds depend on the local carrier, product and address. We will confirm the options before quoting."},
   ]}
 />; }
