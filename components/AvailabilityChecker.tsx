@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/Icon';
 import { normaliseUKPostcode } from '@/lib/connectivity/postcode';
 import type { Premises, Offer } from '@/lib/connectivity/provider';
+import type { EnquiryService } from '@/lib/enquiry-services';
 
 type LookupState =
   | { kind: 'idle' } | { kind: 'invalid' } | { kind: 'loading' }
@@ -12,7 +13,10 @@ type LookupState =
   | { kind: 'offers'; postcode: string; offers: Offer[]; address: string }
   | { kind: 'no-offers'; postcode: string };
 
-export function AvailabilityChecker({ audience = 'business' }: { audience?: 'business' | 'home' }) {
+export function AvailabilityChecker({ audience = 'business', enquiryService }: { audience?: 'business' | 'home'; enquiryService?: EnquiryService }) {
+  const service = enquiryService ?? (audience === 'home' ? 'Home broadband' : 'Business broadband');
+  const quoteHref = (code: string) => `/contact?postcode=${encodeURIComponent(code)}&service=${encodeURIComponent(service)}`;
+  const isLeasedLine = service === 'Leased lines & Ethernet';
   const [postcode, setPostcode] = useState('');
   const [selectedAddress, setSelectedAddress] = useState('');
   const [state, setState] = useState<LookupState>({ kind: 'idle' });
@@ -53,13 +57,13 @@ export function AvailabilityChecker({ audience = 'business' }: { audience?: 'bus
 
   return <section className="availability" id="availability" aria-labelledby="availability-title"><div className="container">
     <div className="availability-shell">
-      <div className="availability-left"><span className="availability-symbol"><Icon name="pin" /></span><div><span className="tiny-kicker">BROADBAND AVAILABILITY</span><h2 id="availability-title">What&apos;s available at your address?</h2><p>{audience === 'home' ? 'Check your home for fibre broadband options.' : 'Explore business broadband and full fibre options for your location.'}</p></div></div>
+      <div className="availability-left"><span className="availability-symbol"><Icon name="pin" /></span><div><span className="tiny-kicker">BROADBAND AVAILABILITY</span><h2 id="availability-title">{isLeasedLine ? 'Tell us where you need a circuit.' : "What's available at your address?"}</h2><p>{isLeasedLine ? 'Start with your postcode. Dedicated Ethernet needs a separate carrier quote and survey.' : audience === 'home' ? 'Check your home for fibre broadband options.' : 'Explore business broadband and full fibre options for your location.'}</p></div></div>
       <form className="availability-form" onSubmit={submit} noValidate><label htmlFor="postcode" className="sr-only">UK postcode</label><input ref={input} id="postcode" name="postcode" type="text" inputMode="text" autoComplete="postal-code" placeholder="Enter your postcode" value={postcode} onChange={e => { setPostcode(e.target.value); setState({ kind: 'idle' }); }} maxLength={10} aria-invalid={state.kind === 'invalid'} required/><button className="btn btn-primary" type="submit" disabled={state.kind === 'loading' || state.kind === 'checking'}>{state.kind === 'loading' ? 'Checking…' : 'Check availability'} <Icon name="arrow" /></button></form>
       {state.kind === 'invalid' && <div className="checker-result error" role="alert">Please enter a valid UK postcode, such as S70 1AA.</div>}
       {state.kind === 'addresses' && <div className="availability-address-list" role="status"><label htmlFor="netlo-address">Choose your address</label><select id="netlo-address" value={selectedAddress} onChange={event => setSelectedAddress(event.target.value)}>{state.addresses.map(a => <option key={a.id} value={a.id}>{a.address}</option>)}</select><button type="button" className="btn btn-primary" onClick={checkAddress}>See options <Icon name="arrow" /></button></div>}
       {state.kind === 'checking' && <div className="checker-result" role="status">Checking services at the selected address…</div>}
-      {state.kind === 'offers' && <div className="availability-offers" role="status"><h3>Services reported for {state.address}</h3><div className="availability-offer-grid">{state.offers.map((offer, index) => <div className="availability-offer" key={`${offer.id}-${index}`}><strong>{offer.name}</strong>{typeof offer.speedDownMbps === 'number' && <span>Indicative downstream: {offer.speedDownMbps} Mbps</span>}<small>Price and eligibility to be confirmed</small></div>)}</div><p><Link className="result-link" href={`/contact?postcode=${encodeURIComponent(state.postcode)}`}>Request a quote <Icon name="arrow" /></Link></p></div>}
-      {(state.kind === 'unavailable' || state.kind === 'no-offers') && <div className="checker-result" role="status"><div><strong>{state.kind === 'no-offers' ? 'No online options returned yet.' : `Need broadband in ${state.postcode}?`}</strong><span>{state.kind === 'no-offers' ? 'That does not necessarily mean your property cannot be connected.' : 'Automatic results are not available at the moment.'} We can check your options manually.</span></div><Link className="result-link" href={`/contact?postcode=${encodeURIComponent(state.postcode)}`}>Request a manual check <Icon name="arrow" /></Link></div>}
+      {state.kind === 'offers' && <div className="availability-offers" role="status"><h3>Services reported for {state.address}</h3><div className="availability-offer-grid">{state.offers.map((offer, index) => <div className="availability-offer" key={`${offer.id}-${index}`}><strong>{offer.name}</strong>{typeof offer.speedDownMbps === 'number' && <span>Indicative downstream: {offer.speedDownMbps} Mbps</span>}<small>Price and eligibility to be confirmed</small></div>)}</div><p><Link className="result-link" href={quoteHref(state.postcode)}>Request a quote <Icon name="arrow" /></Link></p></div>}
+      {(state.kind === 'unavailable' || state.kind === 'no-offers') && <div className="checker-result" role="status"><div><strong>{state.kind === 'no-offers' ? 'No online options returned yet.' : `Need broadband in ${state.postcode}?`}</strong><span>{state.kind === 'no-offers' ? 'That does not necessarily mean your property cannot be connected.' : 'Automatic results are not available at the moment.'} We can check your options manually.</span></div><Link className="result-link" href={quoteHref(state.postcode)}>Request a manual check <Icon name="arrow" /></Link></div>}
     </div>
   </div></section>;
 }

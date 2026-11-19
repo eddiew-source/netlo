@@ -6,7 +6,7 @@ import { enquiryServices, type EnquiryService } from "@/lib/enquiry-services";
 type Status = { kind: "idle" | "busy" } | { kind: "success" | "error"; message: string };
 export function ContactForm({ postcode, service }: { postcode?: string; service?: EnquiryService }) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
-  const [message, setMessage] = useState(postcode ? `Please advise on broadband availability for ${postcode}.\n\n` : "");
+  const [message, setMessage] = useState(postcode ? `Please advise on ${service ?? "broadband availability"} at ${postcode}.\n\n` : "");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); const form = event.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
