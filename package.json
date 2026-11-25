@@ -14,7 +14,7 @@
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "@clerk/nextjs": "7.10.2"
+    "@clerk/nextjs": "7.10.7"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
